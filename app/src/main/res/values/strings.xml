@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Kitchen Assistant</string>
+
+    <string-array name="selector">
+        <item>Recipes</item>
+        <item>Shopping List</item>
+        <item>Pantry</item>
+    </string-array>
+
+    <string-array name="unit">
+
+    </string-array>
+</resources>

@@ -1,0 +1,38 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="jgappsandgames.me.kitchenassistant">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@android:style/Theme.DeviceDefault"
+        android:hardwareAccelerated="true">
+
+        <!--EntryActivity-->
+        <activity android:name=".main.EntryActivity">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+
+        <!--Home-->
+        <activity android:name=".home.HomeActivity" />
+        <activity android:name=".home.HomeActivityTablet" />
+
+        <!--Recipe-->
+        <activity android:name=".recipes.RecipeActivity" />
+
+        <!--ShoppingList-->
+        <activity android:name=".shoppinglist.ShoppingListActivity" />
+
+        <!--Ingredients-->
+        <activity android:name=".ingredients.IngredientActivity" />
+        <activity android:name=".ingredients.SIngredientActivity" />
+
+        <!--Auxiliary Activity-->
+        <activity android:name=".qr.QRActivity" />
+    </application>
+</manifest>

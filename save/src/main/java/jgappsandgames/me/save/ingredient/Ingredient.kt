@@ -5,13 +5,13 @@ import org.json.JSONObject
 
 // Save
 import jgappsandgames.me.save.utility.TESTING_A
-import jgappsandgames.me.save.utility.TESTING_D
+import jgappsandgames.me.save.utility.TESTING_E
 
 /**
  * Ingredient
  * Created by Joshua Garner on 3/1/2018.
  */
-class Ingredient(_version: Int?, _meta: JSONObject?, _category: String?, _item: String?, defaultMeasure: Quanity.Unit?) {
+class Ingredient(_version: Int?, _meta: JSONObject?, _category: String?, _item: String?, _defaultMeasure: Quantity.Unit?) {
     // Constants -----------------------------------------------------------------------------------
     companion object {
         private const val VERSION = "version"
@@ -23,16 +23,16 @@ class Ingredient(_version: Int?, _meta: JSONObject?, _category: String?, _item: 
     }
 
     // Data ----------------------------------------------------------------------------------------
-    private var version: Int = TESTING_D
+    private var version: Int = TESTING_E
     private var meta: JSONObject = JSONObject()
 
     private var category: String = _category ?: "NONE"
     private var item: String = _item ?: ""
-    private var default_measure: Quanity.Unit? = defaultMeasure
+    private var defaultMeasure: Quantity.Unit? = _defaultMeasure
 
     // Constructors --------------------------------------------------------------------------------
     constructor(): this(null, null, null, null, null)
-    constructor(data: JSONObject): this(data.optInt(VERSION, TESTING_A), data.optJSONObject(META), data.optString(CATEGORY), data.optString(ITEM, "Error"), Quanity.Unit.fromInt(data.optInt(DEFAULT_MEASURE, 0)))
+    constructor(data: JSONObject): this(data.optInt(VERSION, TESTING_A), data.optJSONObject(META), data.optString(CATEGORY, ""), data.optString(ITEM, "Error"), Quantity.Unit.fromInt(data.optInt(DEFAULT_MEASURE, 0)))
 
     // Getters -------------------------------------------------------------------------------------
     fun getMeta(): JSONObject {
@@ -51,8 +51,8 @@ class Ingredient(_version: Int?, _meta: JSONObject?, _category: String?, _item: 
         return item
     }
 
-    fun getMeasure(): Quanity.Unit? {
-        return default_measure
+    fun getMeasure(): Quantity.Unit? {
+        return defaultMeasure
     }
 
     // Setters -------------------------------------------------------------------------------------
@@ -66,8 +66,8 @@ class Ingredient(_version: Int?, _meta: JSONObject?, _category: String?, _item: 
         return this
     }
 
-    fun setDefaultMeasure(defaultMeasure: Quanity.Unit?): Ingredient {
-        default_measure = defaultMeasure
+    fun setDefaultMeasure(_defaultMeasure: Quantity.Unit?): Ingredient {
+        defaultMeasure = _defaultMeasure
         return this
     }
 
@@ -79,12 +79,11 @@ class Ingredient(_version: Int?, _meta: JSONObject?, _category: String?, _item: 
     fun toJSON(): JSONObject {
         val data = JSONObject()
 
-        data.put(VERSION, TESTING_D)
+        data.put(VERSION, TESTING_E)
         data.put(META, meta)
-
         data.put(CATEGORY, category)
         data.put(ITEM, item)
-        data.put(DEFAULT_MEASURE, Quanity.Unit.toInt(default_measure ?: Quanity.Unit.NONE))
+        data.put(DEFAULT_MEASURE, Quantity.Unit.toInt(defaultMeasure ?: Quantity.Unit.NONE))
 
         return data
     }

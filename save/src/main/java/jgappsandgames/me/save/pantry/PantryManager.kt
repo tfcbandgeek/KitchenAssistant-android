@@ -11,12 +11,11 @@ import org.json.JSONObject
 import jgappsandgames.me.save.ingredient.Ingredient
 import jgappsandgames.me.save.recipe.Recipe
 import jgappsandgames.me.save.shoppinglist.ShoppingList
-import jgappsandgames.me.save.shoppinglist.toList
 import jgappsandgames.me.save.utility.getApplicationFilepath
 import jgappsandgames.me.save.utility.loadJSON
 import jgappsandgames.me.save.utility.saveJSON
 import jgappsandgames.me.save.utility.TESTING_A
-import jgappsandgames.me.save.utility.TESTING_D
+import jgappsandgames.me.save.utility.TESTING_E
 
 /**
  * PantryManager
@@ -27,13 +26,12 @@ const val FILENAME = "pantry.manager"
 
 const val VERSION = "version"
 const val META = "a"
-
 const val INGREDIENTS = "b"
 const val PANTRY = "c"
 const val CATEGORIES = "d"
 
 // Data --------------------------------------------------------------------------------------------
-var version: Int = TESTING_D
+var version: Int = TESTING_E
 var meta: JSONObject = JSONObject()
 
 var ingredients: ArrayList<Ingredient> = ArrayList()
@@ -42,7 +40,7 @@ var categories: ArrayList<String> = ArrayList()
 
 // Management Methods ------------------------------------------------------------------------------
 fun createPantry() {
-    version = TESTING_D
+    version = TESTING_E
     meta = JSONObject()
     ingredients = ArrayList()
     pantry = ArrayList()
@@ -57,7 +55,7 @@ fun loadPantry() {
     ingredients = toIngredients(data.optJSONArray(INGREDIENTS))
 
     // Testing D
-    if (version >= TESTING_D) {
+    if (version >= TESTING_E) {
         pantry = toIngredients(data.optJSONArray(PANTRY))
 
         try {
@@ -74,7 +72,7 @@ fun loadPantry() {
 fun savePantry() {
     val data = JSONObject()
 
-    data.put(VERSION, TESTING_D)
+    data.put(VERSION, TESTING_E)
     data.put(META, meta)
     data.put(INGREDIENTS, fromIngredients(ingredients))
 

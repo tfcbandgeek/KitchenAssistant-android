@@ -37,7 +37,7 @@ import kotlinx.android.synthetic.main.activity_shopping_list.title_
 
 // Save
 import jgappsandgames.me.save.ingredient.Ingredient
-import jgappsandgames.me.save.ingredient.Quanity
+import jgappsandgames.me.save.ingredient.Quantity
 import jgappsandgames.me.save.shoppinglist.ShoppingList
 import jgappsandgames.me.save.utility.getApplicationFilepath
 import jgappsandgames.me.save.utility.loadJSON
@@ -111,7 +111,7 @@ class ShoppingListActivity: Activity() {
                 if (resultCode == 0) {
                     shopping_list!!.getList().add(ShoppingList.InternalIngredient(
                             Ingredient(JSONObject(data!!.getStringExtra(SIngredientActivity.INGREDIENT))),
-                            Quanity(JSONObject(data.getStringExtra(SIngredientActivity.QUANITY))),
+                            Quantity(JSONObject(data.getStringExtra(SIngredientActivity.QUANITY))),
                             data.getStringExtra(SIngredientActivity.NOTES),
                             data.getBooleanExtra(SIngredientActivity.HAVE, false)))
 
@@ -124,7 +124,7 @@ class ShoppingListActivity: Activity() {
                 if (resultCode == 0) {
                     shopping_list!!.getList()[l] = ShoppingList.InternalIngredient(
                             Ingredient(JSONObject(data!!.getStringExtra(SIngredientActivity.INGREDIENT))),
-                            Quanity(JSONObject(data.getStringExtra(SIngredientActivity.QUANITY))),
+                            Quantity(JSONObject(data.getStringExtra(SIngredientActivity.QUANITY))),
                             data.getStringExtra(SIngredientActivity.NOTES),
                             data.getBooleanExtra(SIngredientActivity.HAVE, false))
 

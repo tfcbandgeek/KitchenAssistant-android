@@ -22,7 +22,6 @@ import jgappsandgames.me.save.utility.saveJSON
 
 // Constants ---------------------------------------------------------------------------------------
 const val FILENAME = "shoppinglist.manager"
-
 const val VERSION = "version"
 const val META = "a"
 const val SHOPPING_LIST = "b"

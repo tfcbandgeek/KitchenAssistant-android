@@ -11,7 +11,7 @@ import org.json.JSONObject
 
 // Save
 import jgappsandgames.me.save.utility.TESTING_A
-import jgappsandgames.me.save.utility.TESTING_D
+import jgappsandgames.me.save.utility.TESTING_E
 import jgappsandgames.me.save.utility.getApplicationFilepath
 import jgappsandgames.me.save.utility.loadJSON
 import jgappsandgames.me.save.utility.saveJSON
@@ -22,11 +22,10 @@ import jgappsandgames.me.save.utility.saveJSON
  */
 // Constants ---------------------------------------------------------------------------------------
 const val FILENAME: String = "recipe.manager"
-
 private const val VERSION: String = "version"
 private const val META: String = "a"
-
 private const val RECIPES: String = "b"
+private const val TAGS: String = "c"
 
 // Static Methods ----------------------------------------------------------------------------------
 private fun toRecipes(array: JSONArray?): ArrayList<String> {
@@ -41,16 +40,30 @@ private fun fromRecipe(recipes: ArrayList<String>?): JSONArray {
     return r
 }
 
+private fun toTags(json: JSONArray): ArrayList<String> {
+    val data = ArrayList<String>()
+    for (i in 0 until json.length()) data.add(json.optString(i, ""))
+    return data
+}
+
+private fun fromTags(tags: ArrayList<String>): JSONArray {
+    val data = JSONArray()
+    for (tag in tags) data.put(tag)
+    return data
+}
+
 // Data --------------------------------------------------------------------------------------------
-var version: Int = TESTING_D
+var version: Int = TESTING_E
 var meta: JSONObject = JSONObject()
 var recipes: ArrayList<String> = ArrayList()
+var tags: ArrayList<String> = ArrayList()
 
 // Management Methods ------------------------------------------------------------------------------
 fun createRecipes() {
-    version = TESTING_D
+    version = TESTING_E
     meta = JSONObject()
     recipes = ArrayList(5)
+    tags = ArrayList(5)
 }
 
 fun loadRecipes() {
@@ -59,13 +72,15 @@ fun loadRecipes() {
     version = data.optInt(VERSION, TESTING_A)
     meta = data.optJSONObject(META)
     recipes = toRecipes(data.optJSONArray(RECIPES))
+    tags = toTags(data.optJSONArray(TAGS))
 }
 
 fun saveRecipes() {
     val data = JSONObject()
-    data.put(VERSION, TESTING_D)
+    data.put(VERSION, TESTING_E)
     data.put(META, meta)
     data.put(RECIPES, fromRecipe(recipes))
+    data.put(TAGS, fromTags(tags))
     saveJSON(File(getApplicationFilepath(), FILENAME), data)
 }
 

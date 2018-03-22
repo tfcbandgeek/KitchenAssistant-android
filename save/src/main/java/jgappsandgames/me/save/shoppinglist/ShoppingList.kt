@@ -20,7 +20,7 @@ import org.json.JSONObject
 
 // Save
 import jgappsandgames.me.save.ingredient.Ingredient
-import jgappsandgames.me.save.ingredient.Quanity
+import jgappsandgames.me.save.ingredient.Quantity
 import jgappsandgames.me.save.utility.TESTING_B
 import jgappsandgames.me.save.utility.TESTING_D
 import jgappsandgames.me.save.utility.getApplicationFilepath
@@ -36,7 +36,6 @@ class ShoppingList(_filename: String?, _version: Int?, _meta: JSONObject?, _name
         private const val FILENAME = "a"
         private const val VERSION = "version"
         private const val META = "b"
-
         private const val NAME = "c"
         private const val NOTES = "d"
         private const val LIST = "e"
@@ -45,18 +44,14 @@ class ShoppingList(_filename: String?, _version: Int?, _meta: JSONObject?, _name
         fun toList(array: JSONArray?): ArrayList<InternalIngredient>? {
             if (array == null) return null
             val r = ArrayList<InternalIngredient>()
-
             for (i in 0 until array.length()) r.add(InternalIngredient(array.optJSONObject(i)))
-
             return r
         }
 
         fun fromList(array: ArrayList<InternalIngredient>?): JSONArray? {
             if (array == null) return null
             val r = JSONArray()
-
             for (l in array) r.put(l.toJSON())
-
             return r
         }
     }
@@ -65,7 +60,6 @@ class ShoppingList(_filename: String?, _version: Int?, _meta: JSONObject?, _name
     private var filename: String = _filename ?: ""
     private var version: Int = _version ?: TESTING_D
     private var meta: JSONObject = _meta ?: JSONObject()
-
     private var name: String = _name ?: ""
     private var notes: String = _note ?: ""
     private var list: ArrayList<InternalIngredient> = _list ?: (toList(_list_j) ?: ArrayList())
@@ -133,21 +127,18 @@ class ShoppingList(_filename: String?, _version: Int?, _meta: JSONObject?, _name
 
     fun toJSON(): JSONObject {
         val data = JSONObject()
-
         data.put(FILENAME, filename)
         data.put(VERSION, version)
         data.put(META, meta)
-
         data.put(NAME, name)
         data.put(NOTES, notes)
         data.put(LIST, fromList(list))
-
         return data
     }
 
     fun toQRCode(): Bitmap {
         val writer = QRCodeWriter()
-        try {
+        return try {
             val matrix: BitMatrix = writer.encode(toJSON().put("TYPE", 2).toString(), BarcodeFormat.QR_CODE, 512, 512)
             val size = Point(matrix.width, matrix.height)
             val bitmap = Bitmap.createBitmap(size.x, size.y, Bitmap.Config.RGB_565)
@@ -158,31 +149,27 @@ class ShoppingList(_filename: String?, _version: Int?, _meta: JSONObject?, _name
                 }
             }
 
-            return bitmap
+            bitmap
         } catch (e: WriterException) {
-            return Bitmap.createBitmap(0,0, Bitmap.Config.RGB_565)
+            Bitmap.createBitmap(0,0, Bitmap.Config.RGB_565)
         }
     }
 
     // Internal Classes ----------------------------------------------------------------------------
-    class InternalIngredient(var ingredient: Ingredient, var amount: Quanity, var notes: String, var status: Boolean) {
+    class InternalIngredient(var ingredient: Ingredient, var amount: Quantity, var notes: String, var status: Boolean) {
         companion object {
             private const val INGREDIENT = "a"
             private const val AMOUNT = "b"
             private const val NOTES = "c"
             private const val STATUS = "d"
         }
-
-        constructor(data: JSONObject): this(Ingredient(data.optJSONObject(INGREDIENT)), Quanity(data.optJSONObject(AMOUNT)), data.optString(NOTES, ""), data.optBoolean(STATUS, false))
-
+        constructor(data: JSONObject): this(Ingredient(data.optJSONObject(INGREDIENT)), Quantity(data.optJSONObject(AMOUNT)), data.optString(NOTES, ""), data.optBoolean(STATUS, false))
         fun toJSON(): JSONObject {
             val data = JSONObject()
-
             data.put(INGREDIENT, ingredient.toJSON())
             data.put(AMOUNT, amount.toJSON())
             data.put(NOTES, notes)
             data.put(STATUS, status)
-
             return data
         }
     }

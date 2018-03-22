@@ -32,7 +32,7 @@ import kotlinx.android.synthetic.main.activity_ingredient.unit
 
 // Save
 import jgappsandgames.me.save.ingredient.Ingredient
-import jgappsandgames.me.save.ingredient.Quanity
+import jgappsandgames.me.save.ingredient.Quantity
 import jgappsandgames.me.save.pantry.getIngredientSelectorList
 import jgappsandgames.me.save.pantry.ingredients
 import jgappsandgames.me.save.pantry.savePantry
@@ -45,12 +45,12 @@ class IngredientActivity: Activity() {
     // Constants -----------------------------------------------------------------------------------
     companion object {
         const val INGREDIENT = "ingredient"
-        const val QUANITY = "quanity"
+        const val QUANITY = "quantity"
     }
 
     // Data ----------------------------------------------------------------------------------------
     var ingredient: Ingredient? = null
-    var quanity: Quanity? = null
+    var quantity: Quantity? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,13 +73,13 @@ class IngredientActivity: Activity() {
         }
 
         if (intent.hasExtra(QUANITY)) {
-            quanity = Quanity(JSONObject(intent.getStringExtra(QUANITY)))
+            quantity = Quantity(JSONObject(intent.getStringExtra(QUANITY)))
 
-            amount.setText(quanity!!.getAmount().toString())
+            amount.setText(quantity!!.getAmount().toString())
             amount.hint = "Amount"
-            unit.text = Quanity.Unit.unitToString(quanity!!.getUnit())
+            unit.text = Quantity.Unit.unitToString(quantity!!.getUnit())
         } else {
-            quanity = Quanity()
+            quantity = Quantity()
 
             amount.setText("")
             amount.hint = "Amount"
@@ -165,7 +165,7 @@ class IngredientActivity: Activity() {
             override fun afterTextChanged(s: Editable?) {
                 if (amount.text.toString().isEmpty()) return
                 try {
-                    quanity!!.setAmount(amount.text.toString().toDouble())
+                    quantity!!.setAmount(amount.text.toString().toDouble())
                 } catch (e: NumberFormatException) {}
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -173,31 +173,31 @@ class IngredientActivity: Activity() {
         })
 
         unit.setOnClickListener {
-            selector("Unit", Quanity.Unit.unitToList(), {_, i ->
-                quanity!!.setUnit(Quanity.Unit.fromInt(i))
+            selector("Unit", Quantity.Unit.unitToList(), { _, i ->
+                quantity!!.setUnit(Quantity.Unit.fromInt(i))
                 updateUnit()
             })
         }
 
         unit.setOnLongClickListener {
-            selector("Convert Unit", Quanity.Unit.unitToList(), {_, i ->
+            selector("Convert Unit", Quantity.Unit.unitToList(), { _, i ->
                 when (i) {
-                    1 -> quanity = quanity!!.toTeaspoon()
-                    2 -> quanity = quanity!!.toTablespoon()
-                    3 -> quanity = quanity!!.toCup()
-                    4 -> quanity = quanity!!.toFluidOunce()
-                    5 -> quanity = quanity!!.toPint()
-                    6 -> quanity = quanity!!.toQuart()
-                    7 -> quanity = quanity!!.toGallon()
-                    8 -> quanity = quanity!!.toOunce()
-                    9 -> quanity = quanity!!.toPound()
-                    10 -> quanity = quanity!!.toMilliliter()
-                    11 -> quanity = quanity!!.toLiter()
-                    12 -> quanity = quanity!!.toGram()
-                    13 -> quanity = quanity!!.toKilogram()
+                    1 -> quantity = quantity!!.toTeaspoon()
+                    2 -> quantity = quantity!!.toTablespoon()
+                    3 -> quantity = quantity!!.toCup()
+                    4 -> quantity = quantity!!.toFluidOunce()
+                    5 -> quantity = quantity!!.toPint()
+                    6 -> quantity = quantity!!.toQuart()
+                    7 -> quantity = quantity!!.toGallon()
+                    8 -> quantity = quantity!!.toOunce()
+                    9 -> quantity = quantity!!.toPound()
+                    10 -> quantity = quantity!!.toMilliliter()
+                    11 -> quantity = quantity!!.toLiter()
+                    12 -> quantity = quantity!!.toGram()
+                    13 -> quantity = quantity!!.toKilogram()
                 }
 
-                amount.setText(quanity!!.getAmount().toString())
+                amount.setText(quantity!!.getAmount().toString())
                 updateUnit()
             })
 
@@ -209,7 +209,7 @@ class IngredientActivity: Activity() {
 
             val data = Intent()
             data.putExtra(INGREDIENT, ingredient!!.toJSON().toString())
-            data.putExtra(QUANITY, quanity!!.toJSON().toString())
+            data.putExtra(QUANITY, quantity!!.toJSON().toString())
             setResult(0, data)
 
             finish()
@@ -235,7 +235,7 @@ class IngredientActivity: Activity() {
             positiveButton("Save", {
                 val data = Intent()
                 data.putExtra(INGREDIENT, ingredient!!.toJSON().toString())
-                data.putExtra(QUANITY, quanity!!.toJSON().toString())
+                data.putExtra(QUANITY, quantity!!.toJSON().toString())
                 setResult(0, data)
 
                 finish()
@@ -271,7 +271,7 @@ class IngredientActivity: Activity() {
     }
 
     private fun updateUnit() {
-        unit.text = Quanity.Unit.unitToString(quanity!!.getUnit())
+        unit.text = Quantity.Unit.unitToString(quantity!!.getUnit())
     }
 
     private fun save() {

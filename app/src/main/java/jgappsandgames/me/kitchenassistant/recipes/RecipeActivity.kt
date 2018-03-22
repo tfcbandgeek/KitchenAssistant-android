@@ -52,7 +52,7 @@ import kotlinx.android.synthetic.main.activity_recipe_portrait.title_
 
 // Save
 import jgappsandgames.me.save.ingredient.Ingredient
-import jgappsandgames.me.save.ingredient.Quanity
+import jgappsandgames.me.save.ingredient.Quantity
 import jgappsandgames.me.save.recipe.Recipe
 import jgappsandgames.me.save.utility.getApplicationFilepath
 import jgappsandgames.me.save.utility.loadJSON
@@ -329,7 +329,7 @@ class RecipeActivity: Activity() {
                 if (resultCode == 0) {
                     recipe!!.getIngredients().add(Recipe.InternalIngredient(
                             Ingredient(JSONObject(data!!.getStringExtra(IngredientActivity.INGREDIENT))),
-                            Quanity(JSONObject(data.getStringExtra(IngredientActivity.QUANITY)))))
+                            Quantity(JSONObject(data.getStringExtra(IngredientActivity.QUANITY)))))
 
                     recipe!!.save()
                     onResume()
@@ -340,7 +340,7 @@ class RecipeActivity: Activity() {
                 if (resultCode == 0) {
                     recipe!!.getIngredients()[l] = Recipe.InternalIngredient(
                             Ingredient(JSONObject(data!!.getStringExtra(IngredientActivity.INGREDIENT))),
-                            Quanity(JSONObject(data.getStringExtra(IngredientActivity.QUANITY))))
+                            Quantity(JSONObject(data.getStringExtra(IngredientActivity.QUANITY))))
 
                     recipe!!.save()
                     onResume()
@@ -356,7 +356,7 @@ class RecipeActivity: Activity() {
 
             view.findViewById<TextView>(R.id.item).text = getItem(position).ingredient.getItem()
             view.findViewById<TextView>(R.id.categories).text = getItem(position).ingredient.getCategoryText()
-            view.findViewById<TextView>(R.id.quanity).text = getItem(position).amount.getAmount().toString() + " " + Quanity.Unit.unitToString(getItem(position).amount.getUnit())
+            view.findViewById<TextView>(R.id.quanity).text = getItem(position).amount.getAmount().toString() + " " + Quantity.Unit.unitToString(getItem(position).amount.getUnit())
 
             view.findViewById<Button>(R.id.edit_button).setOnClickListener {
                 context.l = position

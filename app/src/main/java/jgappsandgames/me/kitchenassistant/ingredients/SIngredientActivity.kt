@@ -39,7 +39,6 @@ import jgappsandgames.me.save.pantry.getIngredientSelectorList
 import jgappsandgames.me.save.pantry.ingredients
 import jgappsandgames.me.save.pantry.savePantry
 
-
 /**
  * SIngredientActivity
  * Created by Joshua Garner on 3/15/2018.
@@ -48,7 +47,7 @@ class SIngredientActivity: Activity() {
     companion object {
         // Constants -------------------------------------------------------------------------------
         const val INGREDIENT = "ingredient"
-        const val QUANITY = "quantity"
+        const val QUANTITY = "quantity"
         const val NOTES = "notes"
         const val HAVE = "have"
     }
@@ -70,7 +69,7 @@ class SIngredientActivity: Activity() {
         ingredient = if (intent.hasExtra(INGREDIENT)) Ingredient(JSONObject(intent.getStringExtra(IngredientActivity.INGREDIENT)))
             else Ingredient()
 
-        quantity = if (intent.hasExtra(QUANITY)) Quantity(JSONObject(intent.getStringExtra(IngredientActivity.QUANITY)))
+        quantity = if (intent.hasExtra(QUANTITY)) Quantity(JSONObject(intent.getStringExtra(IngredientActivity.QUANTITY)))
             else Quantity()
 
         notes = if (intent.hasExtra(NOTES)) intent.getStringExtra(NOTES)
@@ -218,7 +217,7 @@ class SIngredientActivity: Activity() {
 
             val data = Intent()
             data.putExtra(SIngredientActivity.INGREDIENT, ingredient!!.toJSON().toString())
-            data.putExtra(SIngredientActivity.QUANITY, quantity!!.toJSON().toString())
+            data.putExtra(SIngredientActivity.QUANTITY, quantity!!.toJSON().toString())
             data.putExtra(SIngredientActivity.NOTES, notes)
             data.putExtra(SIngredientActivity.HAVE, status)
             setResult(0, data)
@@ -235,18 +234,6 @@ class SIngredientActivity: Activity() {
         })
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
-
-    override fun onPause() {
-        super.onPause()
-    }
-
-    override fun onStop() {
-        super.onStop()
-    }
-
     override fun onBackPressed() {
         alert {
             title = "Exit?"
@@ -254,7 +241,7 @@ class SIngredientActivity: Activity() {
             positiveButton("Save", {
                 val data = Intent()
                 data.putExtra(SIngredientActivity.INGREDIENT, ingredient!!.toJSON().toString())
-                data.putExtra(SIngredientActivity.QUANITY, quantity!!.toJSON().toString())
+                data.putExtra(SIngredientActivity.QUANTITY, quantity!!.toJSON().toString())
                 data.putExtra(SIngredientActivity.NOTES, notes)
                 data.putExtra(SIngredientActivity.HAVE, status)
                 setResult(0, data)

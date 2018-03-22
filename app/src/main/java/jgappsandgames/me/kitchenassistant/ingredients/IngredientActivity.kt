@@ -45,7 +45,7 @@ class IngredientActivity: Activity() {
     // Constants -----------------------------------------------------------------------------------
     companion object {
         const val INGREDIENT = "ingredient"
-        const val QUANITY = "quantity"
+        const val QUANTITY = "quantity"
     }
 
     // Data ----------------------------------------------------------------------------------------
@@ -72,8 +72,8 @@ class IngredientActivity: Activity() {
             categories!!.text = "None"
         }
 
-        if (intent.hasExtra(QUANITY)) {
-            quantity = Quantity(JSONObject(intent.getStringExtra(QUANITY)))
+        if (intent.hasExtra(QUANTITY)) {
+            quantity = Quantity(JSONObject(intent.getStringExtra(QUANTITY)))
 
             amount.setText(quantity!!.getAmount().toString())
             amount.hint = "Amount"
@@ -209,23 +209,11 @@ class IngredientActivity: Activity() {
 
             val data = Intent()
             data.putExtra(INGREDIENT, ingredient!!.toJSON().toString())
-            data.putExtra(QUANITY, quantity!!.toJSON().toString())
+            data.putExtra(QUANTITY, quantity!!.toJSON().toString())
             setResult(0, data)
 
             finish()
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-    }
-
-    override fun onPause() {
-        super.onPause()
-    }
-
-    override fun onStop() {
-        super.onStop()
     }
 
     override fun onBackPressed() {
@@ -235,7 +223,7 @@ class IngredientActivity: Activity() {
             positiveButton("Save", {
                 val data = Intent()
                 data.putExtra(INGREDIENT, ingredient!!.toJSON().toString())
-                data.putExtra(QUANITY, quantity!!.toJSON().toString())
+                data.putExtra(QUANTITY, quantity!!.toJSON().toString())
                 setResult(0, data)
 
                 finish()

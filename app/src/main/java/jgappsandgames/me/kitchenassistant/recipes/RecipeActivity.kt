@@ -292,12 +292,12 @@ class RecipeActivity: Activity() {
                     }
                 }
 
-                if (size.y >= size.x) {
+                return if (size.y >= size.x) {
                     orientation = 1
-                    return true
+                    true
                 } else {
                     orientation = 2
-                    return false
+                    false
                 }
             }
         }
@@ -314,12 +314,12 @@ class RecipeActivity: Activity() {
             }
         }
 
-        if (size.y >= size.x) {
+        return if (size.y >= size.x) {
             orientation = 1
-            return true
+            true
         } else {
             orientation = 2
-            return false
+            false
         }
     }
 
@@ -329,7 +329,7 @@ class RecipeActivity: Activity() {
                 if (resultCode == 0) {
                     recipe!!.getIngredients().add(Recipe.InternalIngredient(
                             Ingredient(JSONObject(data!!.getStringExtra(IngredientActivity.INGREDIENT))),
-                            Quantity(JSONObject(data.getStringExtra(IngredientActivity.QUANITY)))))
+                            Quantity(JSONObject(data.getStringExtra(IngredientActivity.QUANTITY)))))
 
                     recipe!!.save()
                     onResume()
@@ -340,7 +340,7 @@ class RecipeActivity: Activity() {
                 if (resultCode == 0) {
                     recipe!!.getIngredients()[l] = Recipe.InternalIngredient(
                             Ingredient(JSONObject(data!!.getStringExtra(IngredientActivity.INGREDIENT))),
-                            Quantity(JSONObject(data.getStringExtra(IngredientActivity.QUANITY))))
+                            Quantity(JSONObject(data.getStringExtra(IngredientActivity.QUANTITY))))
 
                     recipe!!.save()
                     onResume()
@@ -363,7 +363,7 @@ class RecipeActivity: Activity() {
                 context.startActivityForResult(Intent(context,
                         IngredientActivity::class.java)
                         .putExtra(IngredientActivity.INGREDIENT, recipe.getIngredients()[position].ingredient.toJSON().toString())
-                        .putExtra(IngredientActivity.QUANITY, recipe.getIngredients()[position].amount.toJSON().toString()),
+                        .putExtra(IngredientActivity.QUANTITY, recipe.getIngredients()[position].amount.toJSON().toString()),
                         2)
             }
 

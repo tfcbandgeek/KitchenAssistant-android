@@ -29,7 +29,7 @@ import jgappsandgames.me.save.utility.loadJSON
  * ShoppingListAdapter
  * Created by Joshua Garner on 3/14/2018.
  */
-class ShoppingListAdapter(val context: Context, val listener: ShoppingListListener): BaseAdapter() {
+class ShoppingListAdapter(private val context: Context, private val listener: ShoppingListListener): BaseAdapter() {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view = LayoutInflater.from(context).inflate(R.layout.list_shopping_list, parent, false)
         val sl = getItem(position)

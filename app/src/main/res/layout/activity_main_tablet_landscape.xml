@@ -24,10 +24,16 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/spinner_e"/>
 
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/search_button_e"
+                android:hint="Search"/>
+
             <!--List View-->
             <ListView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:id="@+id/list_e"/>
 
@@ -38,7 +44,7 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:id="@+id/new_title_e"/>
@@ -63,10 +69,16 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/spinner_f"/>
 
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/search_button_f"
+                android:hint="Search"/>
+
             <!--List View-->
             <ListView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:id="@+id/list_f"/>
 
@@ -77,7 +89,7 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:id="@+id/new_title_f"/>
@@ -110,10 +122,16 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/spinner_g"/>
 
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/search_button_g"
+                android:hint="Search"/>
+
             <!--List View-->
             <ListView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:id="@+id/list_g"/>
 
@@ -124,7 +142,7 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:id="@+id/new_title_g"/>
@@ -149,10 +167,16 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/spinner_h"/>
 
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/search_button_h"
+                android:hint="Search"/>
+
             <!--List View-->
             <ListView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:id="@+id/list_h"/>
 
@@ -163,7 +187,7 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:id="@+id/new_title_h"/>

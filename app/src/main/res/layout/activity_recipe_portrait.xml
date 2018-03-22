@@ -21,6 +21,12 @@
             android:layout_height="wrap_content"
             android:id="@+id/note"
             android:hint="Notes"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tags"
+            android:text="None"/>
     </LinearLayout>
 
     <LinearLayout

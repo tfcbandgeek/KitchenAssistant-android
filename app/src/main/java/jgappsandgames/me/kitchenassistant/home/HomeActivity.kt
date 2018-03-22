@@ -241,12 +241,12 @@ class HomeActivity: Activity(), RecipeAdapter.RecipeListener, ShoppingListAdapte
                     }
                 }
 
-                if (size.y >= size.x) {
+                return if (size.y >= size.x) {
                     orientation = 1
-                    return true
+                    true
                 } else {
                     orientation = 2
-                    return false
+                    false
                 }
             }
         }
@@ -263,12 +263,12 @@ class HomeActivity: Activity(), RecipeAdapter.RecipeListener, ShoppingListAdapte
             }
         }
 
-        if (size.y >= size.x) {
+        return if (size.y >= size.x) {
             orientation = 1
-            return true
+            true
         } else {
             orientation = 2
-            return false
+            false
         }
     }
 

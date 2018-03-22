@@ -1,6 +1,9 @@
 package jgappsandgames.me.kitchenassistant.pantry
 
+// Android
 import android.content.Context
+
+// Views
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -9,21 +12,27 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.Button
 import android.widget.TextView
-import jgappsandgames.me.kitchenassistant.R
-import jgappsandgames.me.save.ingredient.Ingredient
-import jgappsandgames.me.save.pantry.getIngredientSelectorList
-import jgappsandgames.me.save.pantry.ingredients
-import jgappsandgames.me.save.pantry.pantry
+
+// Anko
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.customView
 import org.jetbrains.anko.editText
 import org.jetbrains.anko.selector
 
+// App
+import jgappsandgames.me.kitchenassistant.R
+
+// Save
+import jgappsandgames.me.save.ingredient.Ingredient
+import jgappsandgames.me.save.pantry.getIngredientSelectorList
+import jgappsandgames.me.save.pantry.ingredients
+import jgappsandgames.me.save.pantry.pantry
+
 /**
  * PantryAdapter
  * Created by Joshua Garner on 3/19/2018.
  */
-class PantryAdapter(val context: Context, val listener: PantryListener): BaseAdapter() {
+class PantryAdapter(private val context: Context, private val listener: PantryListener): BaseAdapter() {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view = LayoutInflater.from(context).inflate(R.layout.list_pantry, parent, false)
 

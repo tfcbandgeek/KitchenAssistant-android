@@ -29,7 +29,7 @@ import jgappsandgames.me.save.utility.loadJSON
  * RecipeAdapter
  * Created by Joshua Garner on 3/12/2018.
  */
-class RecipeAdapter(val context: Context, val listener: RecipeListener): BaseAdapter() {
+class RecipeAdapter(private val context: Context, private val listener: RecipeListener): BaseAdapter() {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val r = getItem(position)
         val view = LayoutInflater.from(context).inflate(R.layout.list_recipe, parent, false)

@@ -53,7 +53,7 @@ class ShoppingListActivity: Activity() {
     }
 
     // Data ----------------------------------------------------------------------------------------
-    var shopping_list: ShoppingList? = null
+    var shoppingList: ShoppingList? = null
     var l: Int = 0
 
     // LifeCycle Methods ---------------------------------------------------------------------------
@@ -61,16 +61,16 @@ class ShoppingListActivity: Activity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_shopping_list)
-        shopping_list = ShoppingList(loadJSON(File(getApplicationFilepath(), intent.getStringExtra(LIST))))
+        shoppingList = ShoppingList(loadJSON(File(getApplicationFilepath(), intent.getStringExtra(LIST))))
 
-        title_.setText(shopping_list!!.getName())
-        notes.setText(shopping_list!!.getNotes())
+        title_.setText(shoppingList!!.getName())
+        notes.setText(shoppingList!!.getNotes())
 
         title_.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {}
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                shopping_list!!.setName(title_.text.toString()).save()
+                shoppingList!!.setName(title_.text.toString()).save()
             }
         })
 
@@ -78,7 +78,7 @@ class ShoppingListActivity: Activity() {
             override fun afterTextChanged(s: Editable?) {}
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                shopping_list!!.setNotes(notes.text.toString()).save()
+                shoppingList!!.setNotes(notes.text.toString()).save()
             }
         })
 
@@ -90,45 +90,33 @@ class ShoppingListActivity: Activity() {
     override fun onResume() {
         super.onResume()
 
-        list.adapter = ItemAdapter(this, shopping_list!!)
-    }
-
-    override fun onPause() {
-        super.onPause()
-    }
-
-    override fun onStop() {
-        super.onStop()
-    }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
+        list.adapter = ItemAdapter(this, shoppingList!!)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when (requestCode) {
             1 -> {
                 if (resultCode == 0) {
-                    shopping_list!!.getList().add(ShoppingList.InternalIngredient(
+                    shoppingList!!.getList().add(ShoppingList.InternalIngredient(
                             Ingredient(JSONObject(data!!.getStringExtra(SIngredientActivity.INGREDIENT))),
-                            Quantity(JSONObject(data.getStringExtra(SIngredientActivity.QUANITY))),
+                            Quantity(JSONObject(data.getStringExtra(SIngredientActivity.QUANTITY))),
                             data.getStringExtra(SIngredientActivity.NOTES),
                             data.getBooleanExtra(SIngredientActivity.HAVE, false)))
 
-                    shopping_list!!.save()
+                    shoppingList!!.save()
                     onResume()
                 }
             }
 
             2 -> {
                 if (resultCode == 0) {
-                    shopping_list!!.getList()[l] = ShoppingList.InternalIngredient(
+                    shoppingList!!.getList()[l] = ShoppingList.InternalIngredient(
                             Ingredient(JSONObject(data!!.getStringExtra(SIngredientActivity.INGREDIENT))),
-                            Quantity(JSONObject(data.getStringExtra(SIngredientActivity.QUANITY))),
+                            Quantity(JSONObject(data.getStringExtra(SIngredientActivity.QUANTITY))),
                             data.getStringExtra(SIngredientActivity.NOTES),
                             data.getBooleanExtra(SIngredientActivity.HAVE, false))
 
-                    shopping_list!!.save()
+                    shoppingList!!.save()
                     onResume()
                 }
             }
@@ -144,8 +132,8 @@ class ShoppingListActivity: Activity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item!!.itemId) {
             R.id.to_qr -> {
-                QRActivity.TITLE = shopping_list!!.getName()
-                QRActivity.DATA = shopping_list!!.toQRCode()
+                QRActivity.TITLE = shoppingList!!.getName()
+                QRActivity.DATA = shoppingList!!.toQRCode()
                 startActivity(Intent(this, QRActivity::class.java))
                 return true
             }
@@ -170,7 +158,7 @@ class ShoppingListActivity: Activity() {
                 context.startActivityForResult(
                         Intent(context, SIngredientActivity::class.java)
                                 .putExtra(SIngredientActivity.INGREDIENT, l.ingredient.toJSON().toString())
-                                .putExtra(SIngredientActivity.QUANITY, l.amount.toJSON().toString())
+                                .putExtra(SIngredientActivity.QUANTITY, l.amount.toJSON().toString())
                                 .putExtra(SIngredientActivity.NOTES, l.notes)
                                 .putExtra(SIngredientActivity.HAVE, l.status), 2)
             }

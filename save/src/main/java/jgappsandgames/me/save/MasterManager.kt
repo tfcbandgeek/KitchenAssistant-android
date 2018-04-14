@@ -1,6 +1,9 @@
 package jgappsandgames.me.save
 
 // Save
+import jgappsandgames.me.save.meals.createMealManager
+import jgappsandgames.me.save.meals.loadMealManager
+import jgappsandgames.me.save.meals.saveMealManager
 import jgappsandgames.me.save.pantry.createPantry
 import jgappsandgames.me.save.pantry.loadPantry
 import jgappsandgames.me.save.pantry.savePantry
@@ -19,16 +22,19 @@ fun create() {
     createRecipes()
     createPantry()
     createShopping()
+    createMealManager()
 }
 
 fun load() {
     loadRecipes()
     loadPantry()
     loadShopping()
+    loadMealManager()
 }
 
 fun save() {
     saveRecipes()
     savePantry()
     saveShopping()
+    saveMealManager()
 }

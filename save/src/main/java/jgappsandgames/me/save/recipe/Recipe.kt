@@ -115,7 +115,7 @@ class Recipe(_filename: String?, _version: Int?, _meta: JSONObject?, _title: Str
     }
 
     // Data ----------------------------------------------------------------------------------------
-    private var filename: String = _filename ?: (_title ?: (Calendar.getInstance().timeInMillis.toString() + ".ka"))
+    private var filename: String = _filename ?: Calendar.getInstance().timeInMillis.toString() + ".ka"
     private var version: Int = _version ?: TESTING_A
     private var meta: JSONObject = _meta ?: JSONObject()
     private var title: String = _title ?: ""
